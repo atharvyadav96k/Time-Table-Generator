@@ -1,5 +1,5 @@
 // Initialize an empty timetable
-let timetableData = [];
+let timetableData = {};
 
 // Get DOM elements
 const subjectInput = document.getElementById('subject');
@@ -16,14 +16,11 @@ function addSubjectToTimetable() {
   const teacher = teacherInput.value.trim();
 
   if (subject && teacher) {
-    // Create a new timetable slot
-    const slot = {
-      subject,
-      teacher
-    };
-
-    // Add the slot to the timetable data
-    timetableData.push(slot);
+    // Add subject and teacher to timetableData
+    if (!timetableData[subject]) {
+      timetableData[subject] = [];
+    }
+    timetableData[subject].push(teacher);
 
     // Update the timetable display
     renderTimetable();
@@ -59,8 +56,13 @@ function renderTimetable() {
     // Add subjects for each day
     days.forEach(day => {
       const tdSubject = document.createElement('td');
-      const slot = timetableData.find(slot => slot.time === timeslot && slot.day === day);
-      tdSubject.textContent = slot ? `${slot.subject} (${slot.teacher})` : '-';
+      const subjects = Object.keys(timetableData);
+      const subjectIndex = Math.floor(Math.random() * subjects.length);
+      const subject = subjects[subjectIndex];
+      const teachers = timetableData[subject];
+      const teacherIndex = Math.floor(Math.random() * teachers.length);
+      const teacher = teachers[teacherIndex];
+      tdSubject.textContent = `${subject} (${teacher})`;
       tr.appendChild(tdSubject);
     });
 
