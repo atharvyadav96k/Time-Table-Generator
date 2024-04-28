@@ -19,6 +19,7 @@ function signInWithGoogle() {
     .then((result) => {
       const user = result.user;
       console.log("Signed in with Google:", user);
+      window.location.href = "time.html"
     })
     .catch((error) => {
       const errorCode = error.code;

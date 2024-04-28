@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Timetable Generator</title>
+  <link rel="stylesheet" href="./style/time.css">
+</head>
+<body>
+  <h1>Timetable Generator</h1>
+  
+  <div id="input-form">
+    <label for="subject">Subject:</label>
+    <input type="text" id="subject" placeholder="Enter subject name">
+    <label for="teacher">Teacher:</label>
+    <input type="text" id="teacher" placeholder="Enter teacher name">
+    <button id="add-btn">Add</button>
+  </div>
+
+  <div id="timetable">
+    <h2>Timetable</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Time</th>
+          <th>Monday</th>
+          <th>Tuesday</th>
+          <th>Wednesday</th>
+          <th>Thursday</th>
+          <th>Friday</th>
+        </tr>
+      </thead>
+      <tbody id="timetable-body">
+        <!-- Timetable slots will be dynamically added here -->
+      </tbody>
+    </table>
+  </div>
+
+  <script src="./script/time.js"></script>
+</body>
+</html>
