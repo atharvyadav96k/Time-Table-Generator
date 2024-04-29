@@ -61,10 +61,10 @@ function renderTimetable() {
   timetableBody.innerHTML = '';
 
   // Define days of the week
-  const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+  const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
   // Define timeslots
-  const timeslots = ['8:00-9:00', '9:00-10:00', '10:00-11:00', '11:00-12:00', '12:00-1:00'];
+  const timeslots = ['9:30-10:30', '10:30-11:30', '12:10-1:10', '1:10-2:10', '2:20-3:20', '3:20-4:20'];
 
   // Loop through timeslots
   timeslots.forEach(timeslot => {
