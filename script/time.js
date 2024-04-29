@@ -91,8 +91,25 @@ function renderTimetable() {
     });
     timetableBody.appendChild(tr);
   });
+  const subjectChange = Array.from(document.getElementsByClassName('subject'));
+  const changesToTimeTable = document.getElementById('change-abcd');
+  subjectChange.forEach((ele) => {
+    ele.addEventListener('click', (event) => {
+      changesToTimeTable.style.display = 'block'
+      console.log(event.target.innerText);
+      changeNameTeacher(ele)
+    })
+    
+  })
 }
-
+function changeNameTeacher(ele){
+    const setValues = document.getElementById('setValues');
+    setValues.addEventListener('click', ()=>{
+      const sub = document.getElementById('subjectToChange');
+      const teach = document.getElementById('TeacherNameToChange');
+      ele.innerText = `${sub.value}(${teach.value})`
+    })
+}
 const generatePdfButton = document.getElementById('generate-pdf-btn');
 generatePdfButton.addEventListener('click', generatePdf);
 function generatePdf() {
@@ -137,3 +154,4 @@ function setTitle() {
 }
 
 setTitle();
+
