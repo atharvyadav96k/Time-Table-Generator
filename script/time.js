@@ -69,7 +69,7 @@ function renderTimetable() {
   // Loop through timeslots
   timeslots.forEach(timeslot => {
     const tr = document.createElement('tr');
-    
+
     // Add timeslot to first column
     const tdTime = document.createElement('td');
     tdTime.classList.add('time')
@@ -97,10 +97,43 @@ const generatePdfButton = document.getElementById('generate-pdf-btn');
 generatePdfButton.addEventListener('click', generatePdf);
 function generatePdf() {
   const subject = Array.from(document.getElementsByClassName('subject'));
-  subject.forEach((ele, index)=>{
-    ele.addEventListener('click', ()=>{
-      console.log(ele.innerHTML ,index)
+  subject.forEach((ele, index) => {
+    ele.addEventListener('click', () => {
+      console.log(ele.innerHTML, index)
     })
   })
+
+  showTimeTable();
   window.print();
 }
+function resetTimeTable() {
+  const timeTable = document.getElementById("timetable");
+  timeTable.style.width = 'auto'
+  timeTable.style.height = 'auto'
+  timeTable.style.position = 'relative'
+  timeTable.style.background = 'transparent'
+}
+function showTimeTable() {
+  const timeTable = document.getElementById("timetable");
+  timeTable.style.width = '100vw'
+  timeTable.style.height = '100vh'
+  timeTable.style.position = 'absolute'
+  timeTable.style.top = '0'
+  timeTable.style.left = '0'
+  timeTable.style.background = 'white'
+  timeTable.addEventListener('click', () => {
+    resetTimeTable();
+  })
+}
+// adding title to time table
+
+function setTitle() {
+  const title_value = document.getElementById('title-value');
+  title_value.addEventListener('change', () => {
+    const title = document.getElementById('title');
+    title.innerText = title_value.value;
+    console.log(title_value.value);
+  });
+}
+
+setTitle();
