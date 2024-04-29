@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
-
+import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
 const firebaseConfig = {
   apiKey: "AIzaSyB89IZj7T0raYTNGpbgF3EUPJc9su_i7Oo",
   authDomain: "timetable-ind.firebaseapp.com",
@@ -8,12 +8,14 @@ const firebaseConfig = {
   messagingSenderId: "206393385682",
   appId: "1:206393385682:web:895760434684b644f1030b"
 };
-
+// connecting database 
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
 // getting username in next file 
 const urlParams = new URLSearchParams(window.location.search);
 const username = urlParams.get('username');
-const email = urlParams.get('email');
-
+// const email = urlParams.get('email');
+const email = 'atharvyadav96k@gmail.com'
 // Now you can use the username and email as needed in your time.js script
 console.log("Username:", username);
 console.log("Email:", email);
@@ -70,12 +72,14 @@ function renderTimetable() {
     
     // Add timeslot to first column
     const tdTime = document.createElement('td');
+    tdTime.classList.add('time')
     tdTime.textContent = timeslot;
     tr.appendChild(tdTime);
 
     // Add subjects for each day
     days.forEach(day => {
       const tdSubject = document.createElement('td');
+      tdSubject.classList.add('subject');
       const subjects = Object.keys(timetableData);
       const subjectIndex = Math.floor(Math.random() * subjects.length);
       const subject = subjects[subjectIndex];
@@ -85,8 +89,6 @@ function renderTimetable() {
       tdSubject.textContent = `${subject} (${teacher})`;
       tr.appendChild(tdSubject);
     });
-
-    // Append the row to the timetable body
     timetableBody.appendChild(tr);
   });
 }
@@ -94,5 +96,11 @@ function renderTimetable() {
 const generatePdfButton = document.getElementById('generate-pdf-btn');
 generatePdfButton.addEventListener('click', generatePdf);
 function generatePdf() {
+  const subject = Array.from(document.getElementsByClassName('subject'));
+  subject.forEach((ele, index)=>{
+    ele.addEventListener('click', ()=>{
+      console.log(ele.innerHTML ,index)
+    })
+  })
   window.print();
 }

@@ -1,59 +1,91 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 20px;
-  }
-  
-  h1 {
-    text-align: center;
-  }
-  
-  #input-form {
-    margin-bottom: 20px;
-  }
-  
-  #input-form label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  #input-form input {
-    width: 200px;
-    margin-bottom: 10px;
-  }
-  
-  #input-form button {
-    padding: 5px 10px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-  }
-  
-  #input-form button:hover {
-    background-color: #0056b3;
-  }
-  
-  #timetable {
-    margin-top: 20px;
-  }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  table th, table td {
-    border: 1px solid #ccc;
-    padding: 8px;
-    text-align: center;
-  }
-  
-  table th {
-    background-color: #f2f2f2;
-  }
-  
-  table th:first-child {
-    width: 100px;
-  }
-  
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #000000;
+}
+
+h1 {
+  text-align: center;
+  padding: 10px;
+  background-color: #F7F2EF;
+  border-radius: 30px;
+}
+
+#input-form {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  background-color: #FFD9FE;
+  padding: 20px;
+  border-radius: 30px;
+}
+
+#input-form label {
+  display: block;
+  margin-bottom: 5px;
+
+}
+
+#input-form input {
+  width: 200px;
+  margin-bottom: 10px;
+}
+
+#timetable {
+  margin-top: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table th,
+table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: center;
+}
+
+table th {
+  background-color: #f2f2f2;
+}
+
+table th:first-child {
+  width: 100px;
+}
+
+.container {
+  margin-top: 0px;
+  height: 100vh;
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputs{
+  min-width: 400px;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+}
+table{
+  background-color: #0DFFA8;
+  border-radius: 10px;
+  border: none;
+}
+h2{
+  color: white;
+  font-size: 30px;
+}
