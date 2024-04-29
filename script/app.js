@@ -18,8 +18,10 @@ function signInWithGoogle() {
   signInWithPopup(auth, provider)
     .then((result) => {
       const user = result.user;
+      const username = user.displayName; // Assuming displayName contains the username
+      const email = user.email; // Retrieve the email address
       console.log("Signed in with Google:", user);
-      window.location.href = "time.html"
+      window.location.href = `time.html?username=${encodeURIComponent(username)}&email=${encodeURIComponent(email)}`;
     })
     .catch((error) => {
       const errorCode = error.code;

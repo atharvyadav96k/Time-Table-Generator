@@ -1,3 +1,23 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyB89IZj7T0raYTNGpbgF3EUPJc9su_i7Oo",
+  authDomain: "timetable-ind.firebaseapp.com",
+  projectId: "timetable-ind",
+  storageBucket: "timetable-ind.appspot.com",
+  messagingSenderId: "206393385682",
+  appId: "1:206393385682:web:895760434684b644f1030b"
+};
+
+// getting username in next file 
+const urlParams = new URLSearchParams(window.location.search);
+const username = urlParams.get('username');
+const email = urlParams.get('email');
+
+// Now you can use the username and email as needed in your time.js script
+console.log("Username:", username);
+console.log("Email:", email);
+
 // Initialize an empty timetable
 let timetableData = {};
 
@@ -69,4 +89,10 @@ function renderTimetable() {
     // Append the row to the timetable body
     timetableBody.appendChild(tr);
   });
+}
+
+const generatePdfButton = document.getElementById('generate-pdf-btn');
+generatePdfButton.addEventListener('click', generatePdf);
+function generatePdf() {
+  window.print();
 }
