@@ -15,58 +15,151 @@
     <h1>Timetable Generator</h1>
     <div id="input-form">
       <div class="input-values">
-        <label for="subject">Title:</label>
-        <input type="text" class="inputs" id="title-value" placeholder="Enter Title">
         <label for="subject">Subject:</label>
         <input type="text" id="subject" class="inputs" placeholder="Enter subject name">
         <label for="teacher">Teacher:</label>
         <input type="text" id="teacher" class="inputs" placeholder="Enter teacher name">
-
+        <label for="lectures">Lectures per Week:</label>
+        <input type="number" id="lectures" class="inputs" placeholder="Enter number of lectures per week">
         <button id="add-btn" class="btn btn-primary m-2">Add</button>
         <button id="generate-pdf-btn" class="btn btn-success m-2">Generate PDF</button>
       </div>
-      <div class="buttons mt-3">
-
-
-      </div>
+      <div class="buttons mt-3"></div>
     </div>
-    <div class="time-container">
-      <div id="timetable">
-        <h3 id="title"></h3>
-        <h2>Timetable</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Time</th>
-              <th>Monday</th>
-              <th>Tuesday</th>
-              <th>Wednesday</th>
-              <th>Thursday</th>
-              <th>Friday</th>
-              <th>Saturday</th>
-            </tr>
-          </thead>
-          <tbody id="timetable-body">
-            <!-- Timetable slots will be dynamically added here -->
-          </tbody>
-        </table>
-      </div>
-    </div>
+    <table id="timetable">
+      <tr class="">
+        <th>Monday</th>
+        <th>Tuesday</th>
+        <th>Wednesday</th>
+        <th>Thursday</th>
+        <th>Friday</th>
+        <th>Saturday</th>
+      </tr>
+      <tr class="">
+        <th class="element">1</th>
+        <th class="element">2</th>
+        <th class="element">3</th>
+        <th class="element">4</th>
+        <th class="element">5</th>
+        <th class="element">6</th>
+      </tr>
+      <tr class="">
+        <th class="element">7</th>
+        <th class="element">8</th>
+        <th class="element">9</th>
+        <th class="element">0</th>
+        <th class="element">1</th>
+        <th class="element">2</th>
+      </tr>
+      <tr class="">
+        <th class="element">3</th>
+        <th class="element">4</th>
+        <th class="element">5</th>
+        <th class="element">6</th>
+        <th class="element">7</th>
+        <th class="element">8</th>
+      </tr>
+      <tr class="">
+        <th class="element">9</th>
+        <th class="element">0</th>
+        <th class="element">1</th>
+        <th class="element">2</th>
+        <th class="element">3</th>
+        <th class="element">4</th>
+      </tr>
+      <tr class="">
+        <th class="element">5</th>
+        <th class="element">6</th>
+        <th class="element">7</th>
+        <th class="element">8</th>
+        <th class="element">9</th>
+        <th class="element">0</th>
+      </tr>
+      <tr class="">
+        <th class="element">1</th>
+        <th class="element">2</th>
+        <th class="element">3</th>
+        <th class="element">4</th>
+        <th class="element">5</th>
+        <th class="element">6</th>
+      </tr>
+    </table>
     <div id="change-abcd">
       <label for="subjectToChange">Subject</label>
       <input type="text" class="inputs" id="subjectToChange">
       <label for="TeacherNameToChange">Teacher</label>
       <input type="text" class="inputs" id="TeacherNameToChange">
-      <button class="btn btn-danger " id="setValues" style="margin-left: 20px;">Change</button>
+      <button class="btn btn-danger" id="setValues" style="margin-left: 20px;">Change</button>
     </div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
-  <script src="./script/time.js" type="module"></script>
+  <script>
+    let Timetable = [
+      ["", "", "", "", "", ""],
+      ["", "", "", "", "", ""],
+      ["", "", "", "", "", ""],
+      ["", "", "", "", "", ""],
+      ["", "", "", "", "", ""],
+      ["", "", "", "", "", ""]
+    ];
+    let tableIndex = 0;
+    const add = document.getElementById('add-btn');
+    add.addEventListener('click', function () {
+      console.log("click add")
+      const subject = document.getElementById('subject');
+      const teacher = document.getElementById('teacher');
+      const lectures = document.getElementById('lectures');
+      for (let i = 0; i < lectures.value; i++) {
+        console.log(tableIndex)
+        if (tableIndex >= 6) {
+          tableIndex = 0;
+          console.log("change Value")
+        }
+        setValue(Timetable[tableIndex], `${subject.value}(${teacher.value})`);
+      }
+      render();
+      console.log("Empty Input")
+      subject.value = "";
+      teacher.value = "";
+      lectures.value = 0;
+      console.log(Timetable)
+    });
+
+    function setValue(ele, val) {
+      for (let i = 0; i < 6; i++) {
+        let a = Math.floor(Math.random() * 6);
+        if (ele[a] == "") {
+          ele[a] = val;
+          tableIndex++;
+          return true;
+        }
+      }
+      return false;
+    }
+    function render() {
+      const element = Array.from(document.getElementsByClassName('element'));
+      const size = 6;
+      const array2D = [];
+      for (let i = 0; i < size; i++) {
+        array2D.push([]);
+      }
+      for (let i = 0; i < size; i++) {
+        for (let j = 0; j < size; j++) {
+          array2D[i][j] = element[i * size + j];
+        }
+      }
+      for(let i=0;i<size;i++){
+        for(let j=0;j<size;j++){
+          array2D[j][i].innerHTML = Timetable[i][j];
+        }
+      }
+    }
+
+  </script>
 </body>
 
 </html>
