@@ -26,64 +26,68 @@
       </div>
       <div class="buttons mt-3"></div>
     </div>
-    <table id="timetable">
-      <tr class="">
-        <th>Monday</th>
-        <th>Tuesday</th>
-        <th>Wednesday</th>
-        <th>Thursday</th>
-        <th>Friday</th>
-        <th>Saturday</th>
-      </tr>
-      <tr class="">
-        <th class="element">1</th>
-        <th class="element">2</th>
-        <th class="element">3</th>
-        <th class="element">4</th>
-        <th class="element">5</th>
-        <th class="element">6</th>
-      </tr>
-      <tr class="">
-        <th class="element">7</th>
-        <th class="element">8</th>
-        <th class="element">9</th>
-        <th class="element">0</th>
-        <th class="element">1</th>
-        <th class="element">2</th>
-      </tr>
-      <tr class="">
-        <th class="element">3</th>
-        <th class="element">4</th>
-        <th class="element">5</th>
-        <th class="element">6</th>
-        <th class="element">7</th>
-        <th class="element">8</th>
-      </tr>
-      <tr class="">
-        <th class="element">9</th>
-        <th class="element">0</th>
-        <th class="element">1</th>
-        <th class="element">2</th>
-        <th class="element">3</th>
-        <th class="element">4</th>
-      </tr>
-      <tr class="">
-        <th class="element">5</th>
-        <th class="element">6</th>
-        <th class="element">7</th>
-        <th class="element">8</th>
-        <th class="element">9</th>
-        <th class="element">0</th>
-      </tr>
-      <tr class="">
-        <th class="element">1</th>
-        <th class="element">2</th>
-        <th class="element">3</th>
-        <th class="element">4</th>
-        <th class="element">5</th>
-        <th class="element">6</th>
-      </tr>
-    </table>
+    <div class="table-container">
+      <h1>Time Table</h1>
+      <table id="timetable">
+        <tr class="">
+          <th>Monday</th>
+          <th>Tuesday</th>
+          <th>Wednesday</th>
+          <th>Thursday</th>
+          <th>Friday</th>
+          <th>Saturday</th>
+        </tr>
+        <tr class="">
+          <th class="element">1</th>
+          <th class="element">2</th>
+          <th class="element">3</th>
+          <th class="element">4</th>
+          <th class="element">5</th>
+          <th class="element">6</th>
+        </tr>
+        <tr class="">
+          <th class="element">7</th>
+          <th class="element">8</th>
+          <th class="element">9</th>
+          <th class="element">0</th>
+          <th class="element">1</th>
+          <th class="element">2</th>
+        </tr>
+        <tr class="">
+          <th class="element">3</th>
+          <th class="element">4</th>
+          <th class="element">5</th>
+          <th class="element">6</th>
+          <th class="element">7</th>
+          <th class="element">8</th>
+        </tr>
+        <tr class="">
+          <th class="element">9</th>
+          <th class="element">0</th>
+          <th class="element">1</th>
+          <th class="element">2</th>
+          <th class="element">3</th>
+          <th class="element">4</th>
+        </tr>
+        <tr class="">
+          <th class="element">5</th>
+          <th class="element">6</th>
+          <th class="element">7</th>
+          <th class="element">8</th>
+          <th class="element">9</th>
+          <th class="element">0</th>
+        </tr>
+        <tr class="">
+          <th class="element">1</th>
+          <th class="element">2</th>
+          <th class="element">3</th>
+          <th class="element">4</th>
+          <th class="element">5</th>
+          <th class="element">6</th>
+        </tr>
+      </table>
+    </div>
+
     <div id="change-abcd">
       <label for="subjectToChange">Subject</label>
       <input type="text" class="inputs" id="subjectToChange">
@@ -98,6 +102,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
   <script>
+    const generate_pdf_btn = document.getElementById('generate-pdf-btn');
+    generate_pdf_btn.addEventListener('click', generatePdf);
     let Timetable = [
       ["", "", "", "", "", ""],
       ["", "", "", "", "", ""],
@@ -152,13 +158,18 @@
           array2D[i][j] = element[i * size + j];
         }
       }
-      for(let i=0;i<size;i++){
-        for(let j=0;j<size;j++){
+      for (let i = 0; i < size; i++) {
+        for (let j = 0; j < size; j++) {
           array2D[j][i].innerHTML = Timetable[i][j];
         }
       }
     }
-
+    function generatePdf(){
+      const table_container = Array.from(document.getElementsByClassName('table-container'));
+      table_container[0].classList.add('full')
+      window.print();
+      table_container[0].classList.remove('full');
+    }
   </script>
 </body>
 
