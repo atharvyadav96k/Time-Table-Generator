@@ -15,6 +15,8 @@
     <h1>Timetable Generator</h1>
     <div id="input-form">
       <div class="input-values">
+        <label for="heading">Heading:</label>
+        <input type="text" id="heading" class="inputs" placeholder="Enter subject name" onchange="headingChange()">
         <label for="subject">Subject:</label>
         <input type="text" id="subject" class="inputs" placeholder="Enter subject name">
         <label for="teacher">Teacher:</label>
@@ -27,7 +29,7 @@
       <div class="buttons mt-3"></div>
     </div>
     <div class="table-container">
-      <h1>Time Table</h1>
+      <h1 id="h">Time Table</h1>
       <table id="timetable">
         <tr class="">
           <th>Time</th>
@@ -94,7 +96,6 @@
         </tr>
       </table>
     </div>
-
     <div id="change-abcd">
       <label for="subjectToChange">Subject</label>
       <input type="text" class="inputs" id="subjectToChange">
@@ -110,6 +111,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
   <script>
     const generate_pdf_btn = document.getElementById('generate-pdf-btn');
+    const change_abcd = document.getElementById('change-abcd');
     generate_pdf_btn.addEventListener('click', generatePdf);
     let Timetable = [
       ["", "", "", "", "", ""],
@@ -176,6 +178,37 @@
       table_container[0].classList.add('full')
       window.print();
       table_container[0].classList.remove('full');
+    }
+    const elements = Array.from(document.getElementsByClassName('element'));
+    let selectedElement = null;
+
+    elements.forEach((ele) => {
+      ele.addEventListener('click', () => {
+        // Reset background color for all elements
+        elements.forEach((ele) => {
+          ele.style.backgroundColor = 'white';
+        });
+
+        // Update the selected element
+        selectedElement = ele;
+        ele.style.backgroundColor = 'red';
+        change_abcd.style.display = 'block';
+
+        // Clear input fields
+        subjectToChange.value = '';
+        TeacherNameToChange.value = '';
+      });
+      ele.style.backgroundColor = 'white';
+    });
+
+    // Add the event listener to setValues button once
+    setValues.addEventListener('click', () => {
+      if (selectedElement) {
+        selectedElement.innerText = `${subjectToChange.value} (${TeacherNameToChange.value})`;
+      }
+    });
+    function headingChange(){
+      document.getElementById('h').innerText = document.getElementById('heading').value
     }
   </script>
 </body>
